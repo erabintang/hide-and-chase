@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-
 namespace Invector.vCharacterController
 {
     public class vThirdPersonInput : MonoBehaviour
@@ -21,6 +20,15 @@ namespace Invector.vCharacterController
         [HideInInspector] public vThirdPersonCamera tpCamera;
         [HideInInspector] public Camera cameraMain;
 
+        [Header("Mobile Joystick")]
+        public FixedJoystick moveJoystick;
+        public VariableJoystick cameraJoystick;
+
+        private float lastForwardTap;
+        private float lastJumpTap;
+        private float holdForwardTime = 0f;
+
+        private bool sprinting = false;
         #endregion
 
         protected virtual void Start()
@@ -83,8 +91,17 @@ namespace Invector.vCharacterController
 
         public virtual void MoveInput()
         {
+#if UNITY_ANDROID || UNITY_IOS
+
+        cc.input.x = moveJoystick.Horizontal;
+        cc.input.z = moveJoystick.Vertical;
+
+#else
+
             cc.input.x = Input.GetAxis(horizontalInput);
             cc.input.z = Input.GetAxis(verticallInput);
+
+#endif
         }
 
         protected virtual void CameraInput()
@@ -107,8 +124,20 @@ namespace Invector.vCharacterController
             if (tpCamera == null)
                 return;
 
-            var Y = Input.GetAxis(rotateCameraYInput);
-            var X = Input.GetAxis(rotateCameraXInput);
+            float X;
+            float Y;
+
+#if UNITY_ANDROID || UNITY_IOS
+
+X = cameraJoystick.Horizontal;
+Y = cameraJoystick.Vertical;
+
+#else
+
+            Y = Input.GetAxis(rotateCameraYInput);
+            X = Input.GetAxis(rotateCameraXInput);
+
+#endif
 
             tpCamera.RotateCamera(X, Y);
         }
@@ -121,12 +150,31 @@ namespace Invector.vCharacterController
 
         protected virtual void SprintInput()
         {
-            if (Input.GetKeyDown(sprintInput))
-                cc.Sprint(true);
-            else if (Input.GetKeyUp(sprintInput))
-                cc.Sprint(false);
-        }
+            if (moveJoystick != null)
+            {
+                if (moveJoystick.Vertical > 0.8f)
+                {
+                    holdForwardTime += Time.deltaTime;
 
+                    if (holdForwardTime >= 2f)
+                        sprinting = true;
+                }
+                else
+                {
+                    holdForwardTime = 0f;
+                    sprinting = false;
+                }
+
+                cc.Sprint(sprinting);
+            }
+            else
+            {
+                if (Input.GetKeyDown(sprintInput))
+                    cc.Sprint(true);
+                else if (Input.GetKeyUp(sprintInput))
+                    cc.Sprint(false);
+            }
+        }
         /// <summary>
         /// Conditions to trigger the Jump animation & behavior
         /// </summary>
@@ -141,8 +189,25 @@ namespace Invector.vCharacterController
         /// </summary>
         protected virtual void JumpInput()
         {
+#if UNITY_ANDROID || UNITY_IOS
+
+    if (cameraJoystick.Vertical > 0.9f)
+    {
+        if (Time.time - lastJumpTap < 0.3f)
+        {
+            if (JumpConditions())
+                cc.Jump();
+        }
+
+        lastJumpTap = Time.time;
+    }
+
+#else
+
             if (Input.GetKeyDown(jumpInput) && JumpConditions())
                 cc.Jump();
+
+#endif
         }
 
         #endregion       

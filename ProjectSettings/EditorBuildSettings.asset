@@ -20,6 +20,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TPS_Level2.unity
     guid: 3e4c7fe18f9ac5643894b4097dad9536
+  - enabled: 1
+    path: Assets/Scenes/mainmenu2.unity
+    guid: f6ac9ad118d7bc94f980219a41fca431
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

@@ -12,4 +12,9 @@ public class BackToMenu : MonoBehaviour
     {
         SceneManager.LoadScene("mainmenu");
     }
+
+     public void GoToMainMenu2()
+    {
+        SceneManager.LoadScene("mainmenu2");
+    }
 }

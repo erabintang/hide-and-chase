@@ -7,4 +7,9 @@ public class MainMenu : MonoBehaviour
     {
         SceneManager.LoadScene("TPS");
     }
+
+    public void PlayGame2()
+    {
+        SceneManager.LoadScene("TPS_Level2");
+    }
 }
