@@ -1,0 +1,5 @@
+C:/Users/binta/Downloads/mobil/My project/.utmp/RelWithDebInfo/51p5z5uo/armeabi-v7a/CMakeFiles/edit_cache.dir
+C:/Users/binta/Downloads/mobil/My project/.utmp/RelWithDebInfo/51p5z5uo/armeabi-v7a/CMakeFiles/rebuild_cache.dir
+C:/Users/binta/Downloads/mobil/My project/.utmp/RelWithDebInfo/51p5z5uo/armeabi-v7a/GameActivity/CMakeFiles/game.dir
+C:/Users/binta/Downloads/mobil/My project/.utmp/RelWithDebInfo/51p5z5uo/armeabi-v7a/GameActivity/CMakeFiles/edit_cache.dir
+C:/Users/binta/Downloads/mobil/My project/.utmp/RelWithDebInfo/51p5z5uo/armeabi-v7a/GameActivity/CMakeFiles/rebuild_cache.dir

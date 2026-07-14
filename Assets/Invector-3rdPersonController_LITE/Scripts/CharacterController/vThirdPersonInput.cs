@@ -21,9 +21,8 @@ namespace Invector.vCharacterController
         [HideInInspector] public Camera cameraMain;
 
         [Header("Mobile Joystick")]
-        public FixedJoystick moveJoystick;
-        public VariableJoystick cameraJoystick;
-
+        public DynamicJoystick moveJoystick;
+        public DynamicJoystick cameraJoystick;
         private float lastForwardTap;
         private float lastJumpTap;
         private float holdForwardTime = 0f;
